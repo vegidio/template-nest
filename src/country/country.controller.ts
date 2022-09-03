@@ -1,6 +1,7 @@
 import { Controller, Get, Param } from '@nestjs/common';
-import { CountryService } from '@src/services';
-import { Country } from '@src/models';
+import { Country } from './country.entity';
+import { CountryCodePipe } from './country.pipe';
+import { CountryService } from './country.service';
 
 @Controller('countries')
 export class CountryController {
@@ -12,7 +13,7 @@ export class CountryController {
     }
 
     @Get(':code')
-    findOne(@Param('code') code: string): Promise<Country> {
-        return this.countryService.findOne(code.toUpperCase());
+    findOne(@Param('code', CountryCodePipe) code: string): Promise<Country> {
+        return this.countryService.findOne(code);
     }
 }

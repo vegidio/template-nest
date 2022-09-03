@@ -1,5 +1,6 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
-import { Country, User } from '@src/models';
+import { User } from '@src/user';
+import { Country } from '@src/country';
 
 export const databaseOptions: TypeOrmModuleOptions = {
     type: 'postgres',
@@ -8,6 +9,6 @@ export const databaseOptions: TypeOrmModuleOptions = {
     username: process.env.PG_USERNAME,
     password: process.env.PG_PASSWORD,
     database: 'countries',
-    entities: [Country, User],
-    synchronize: true,
+    entities: [User, Country],
+    synchronize: false,
 };

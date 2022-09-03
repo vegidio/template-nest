@@ -12,10 +12,10 @@ export class User extends BaseEntity {
     username: string;
 
     @Column()
-    password: string;
+    email: string;
 
     @Column()
-    salt: string;
+    hash: string;
 
     constructor(init?: Partial<User>) {
         super();

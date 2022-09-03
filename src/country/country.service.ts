@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import { Country } from '@src/models';
+import { Country } from './country.entity';
 
 @Injectable()
 export class CountryService {
     findAll(): Promise<Country[]> {
-        return Country.createQueryBuilder('country').orderBy(`country.name->>'common'`, 'ASC').getMany();
+        return Country.find({ order: { name: { common: 'ASC' } } });
     }
 
     findOne(code: string): Promise<Country> {

@@ -15,7 +15,8 @@
         "test": "jest",
         "test:watch": "jest --watch",
         "test:cov": "jest --coverage",
-        "test:e2e": "jest --config ./test/jest-e2e.json"
+        "test:e2e": "jest --config ./test/jest-e2e.json",
+        "docker": "docker build -t vegidio/tpl-nestjs . --build-arg VERSION=$(date +'%y.%-m.%-d')"
     },
     "dependencies": {
         "@nestjs/common": "9.0.11",

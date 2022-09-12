@@ -1,4 +1,5 @@
 import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Exclude } from 'class-transformer';
 
 @Entity({ name: 'users' })
 export class User extends BaseEntity {
@@ -15,6 +16,7 @@ export class User extends BaseEntity {
     email: string;
 
     @Column()
+    @Exclude()
     hash: string;
 
     constructor(init?: Partial<User>) {

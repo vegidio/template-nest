@@ -44,7 +44,7 @@ export class Country extends BaseEntity {
     @Column({ type: 'decimal' })
     area: number;
 
-    @Column({ type: 'simple-array' })
+    @Column('decimal', { array: true })
     coordinates: number[];
 
     @Column({ type: 'jsonb' })

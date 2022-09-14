@@ -1,7 +1,7 @@
-import { BaseEntity, Column, Entity, PrimaryColumn } from 'typeorm';
+import { Column, Entity, PrimaryColumn } from 'typeorm';
 
 @Entity({ name: 'countries' })
-export class Country extends BaseEntity {
+export class Country {
     @PrimaryColumn({ unique: true })
     code: string;
 
@@ -54,7 +54,6 @@ export class Country extends BaseEntity {
     };
 
     constructor(init?: Partial<Country>) {
-        super();
         Object.assign(this, init);
     }
 }

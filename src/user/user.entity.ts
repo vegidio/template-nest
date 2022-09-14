@@ -1,8 +1,8 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import { Exclude } from 'class-transformer';
 
 @Entity({ name: 'users' })
-export class User extends BaseEntity {
+export class User {
     @PrimaryGeneratedColumn()
     id: number;
 
@@ -20,7 +20,6 @@ export class User extends BaseEntity {
     hash: string;
 
     constructor(init?: Partial<User>) {
-        super();
         Object.assign(this, init);
     }
 }

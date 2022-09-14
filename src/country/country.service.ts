@@ -1,13 +1,17 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { Country } from './country.entity';
 
 @Injectable()
 export class CountryService {
+    constructor(@InjectRepository(Country) private countryRepository: Repository<Country>) {}
+
     findAll(): Promise<Country[]> {
-        return Country.find({ order: { name: { common: 'ASC' } } });
+        return this.countryRepository.find({ order: { name: { common: 'ASC' } } });
     }
 
     findOne(code: string): Promise<Country> {
-        return Country.findOneBy({ code });
+        return this.countryRepository.findOneBy({ code });
     }
 }

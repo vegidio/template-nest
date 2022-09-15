@@ -41,10 +41,10 @@ export class Country {
     @Column()
     population: number;
 
-    @Column({ type: 'decimal' })
+    @Column({ type: 'real' })
     area: number;
 
-    @Column('decimal', { array: true })
+    @Column('real', { array: true })
     coordinates: number[];
 
     @Column({ type: 'jsonb' })

@@ -1,1 +1,1 @@
-export * from './access-token.decorator';
+export * from './token.decorator';

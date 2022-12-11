@@ -4,11 +4,11 @@ import { UserModule } from '@src/user';
 import { authOptions } from '@src/config';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
-import { JwtStrategy } from './strategy';
+import { AccessTokenStrategy, RefreshTokenStrategy } from './strategy';
 
 @Module({
     imports: [JwtModule.register(authOptions), UserModule],
     controllers: [AuthController],
-    providers: [AuthService, JwtStrategy],
+    providers: [AuthService, AccessTokenStrategy, RefreshTokenStrategy],
 })
 export class AuthModule {}

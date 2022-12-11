@@ -1,22 +1,21 @@
 import { JwtModuleOptions } from '@nestjs/jwt';
+import { readFileSync } from 'fs';
 
-const privateKey = `
------BEGIN PRIVATE KEY-----
-MIGHAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBG0wawIBAQQg9v1cZXIZlNXj/Oc+
-tbGKddEPH1CpBIuPAF3BtmBlKsihRANCAATdLMz7SxADKi2iJC3n1rFdQam+WaVt
-hFSkEr6AlNscFTz7I0GDS13RzgivREykKzeU/KtHF0p8uVNXoW45hPrC
------END PRIVATE KEY-----
-`.trim();
+const load = (fileName: string): string => {
+    return readFileSync(`${__dirname}/../assets/certs/${fileName}.pem`, 'utf8').trim();
+};
 
-const publicKey = `
------BEGIN PUBLIC KEY-----
-MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE3SzM+0sQAyotoiQt59axXUGpvlml
-bYRUpBK+gJTbHBU8+yNBg0td0c4Ir0RMpCs3lPyrRxdKfLlTV6FuOYT6wg==
------END PUBLIC KEY-----
-`.trim();
+export const keys = {
+    accessToken: {
+        private: load('access-token-private'),
+        public: load('access-token-public'),
+    },
+    refreshToken: {
+        private: load('refresh-token-private'),
+        public: load('refresh-token-public'),
+    },
+};
 
 export const authOptions: JwtModuleOptions = {
-    privateKey,
-    publicKey,
     signOptions: { algorithm: 'ES256' },
 };

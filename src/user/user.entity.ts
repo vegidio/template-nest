@@ -1,3 +1,4 @@
+import { ApiHideProperty } from '@nestjs/swagger';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import { Exclude } from 'class-transformer';
 
@@ -17,6 +18,7 @@ export class User {
 
     @Column()
     @Exclude()
+    @ApiHideProperty()
     hash: string;
 
     constructor(init?: Partial<User>) {

@@ -9,11 +9,7 @@ export class Country {
     name: {
         common: string;
         official: string;
-        nativeName: {
-            language: string;
-            common: string;
-            official: string;
-        }[];
+        nativeName: NativeName[];
     };
 
     @Column({ nullable: true })
@@ -26,17 +22,10 @@ export class Country {
     subRegion?: string;
 
     @Column({ type: 'jsonb' })
-    languages: {
-        code: string;
-        name: string;
-    }[];
+    languages: Language[];
 
     @Column({ type: 'jsonb' })
-    currencies: {
-        code: string;
-        name: string;
-        symbol: string;
-    }[];
+    currencies: Currency[];
 
     @Column()
     population: number;
@@ -56,4 +45,21 @@ export class Country {
     constructor(init?: Partial<Country>) {
         Object.assign(this, init);
     }
+}
+
+class NativeName {
+    language: string;
+    common: string;
+    official: string;
+}
+
+class Language {
+    code: string;
+    name: string;
+}
+
+class Currency {
+    code: string;
+    name: string;
+    symbol: string;
 }

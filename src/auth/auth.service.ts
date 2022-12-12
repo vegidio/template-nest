@@ -1,8 +1,9 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as argon2 from 'argon2';
 import { User, UserService } from '@src/user';
 import { keys } from '@src/config';
+import { UnauthorizedException } from '@src/exceptions';
 import { AccessTokenDto, RefreshTokenDto, TokenResponseDto } from './dto';
 
 @Injectable()
@@ -11,10 +12,10 @@ export class AuthService {
 
     async signIn(email: string, password: string): Promise<TokenResponseDto> {
         const user = await this.userService.findOneByEmail(email);
-        if (!user) throw new UnauthorizedException('Invalid user credentials');
+        if (!user) throw new UnauthorizedException({ detail: 'Invalid user credentials' });
 
         const pwMatched = await argon2.verify(user.hash, password);
-        if (!pwMatched) throw new UnauthorizedException('Invalid user credentials');
+        if (!pwMatched) throw new UnauthorizedException({ detail: 'Invalid user credentials' });
 
         return this.createToken(user);
     }

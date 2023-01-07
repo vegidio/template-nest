@@ -1,5 +1,4 @@
 import { AuthGuard } from '@nestjs/passport';
-import { ExecutionContext } from '@nestjs/common';
 import { UnauthorizedException } from '@src/exceptions';
 
 export class AccessTokenGuard extends AuthGuard('access-token') {
@@ -8,7 +7,7 @@ export class AccessTokenGuard extends AuthGuard('access-token') {
     }
 
     // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-    handleRequest<TUser = any>(err: any, user: any, info: any, context: ExecutionContext, status?: any): TUser {
+    handleRequest<TUser = any>(err: any, user: any, info: any): TUser {
         if (err || !user) {
             if (info.name === 'TokenExpiredError') {
                 throw new UnauthorizedException({ type: 'JWT_EXPIRED', detail: 'The bearer token expired' });

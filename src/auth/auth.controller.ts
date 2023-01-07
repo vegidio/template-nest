@@ -1,7 +1,7 @@
 import { Body, Controller, Get, HttpCode, Post, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
-import { RefreshTokenGuard } from './guard/refresh-token.guard';
+import { RefreshTokenGuard } from './guard';
 import { SignInRequestDto, TokenResponseDto } from './dto';
 import { Token } from './decorator';
 

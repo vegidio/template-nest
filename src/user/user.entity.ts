@@ -1,7 +1,7 @@
 import { ApiHideProperty } from '@nestjs/swagger';
+import { Field, Int, ObjectType } from '@nestjs/graphql';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import { Exclude } from 'class-transformer';
-import { Field, Int, ObjectType } from '@nestjs/graphql';
 
 @Entity({ name: 'users' })
 @ObjectType()

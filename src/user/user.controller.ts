@@ -7,12 +7,12 @@ import { User } from './user.entity';
 
 @ApiTags('Users')
 @ApiBearerAuth()
+@UseGuards(AccessTokenGuard)
 @UseInterceptors(ClassSerializerInterceptor)
 @Controller({ path: 'users', version: '1' })
 export class UserController {
     constructor(private readonly userService: UserService) {}
 
-    @UseGuards(AccessTokenGuard)
     @Get('me')
     findMe(@Token('sub') userId: number): Promise<User> {
         return this.userService.findOneById(userId);

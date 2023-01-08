@@ -51,8 +51,23 @@ type Country {
   flags: Flag!
 }
 
+type TokenResponseDto {
+  accessToken: String!
+  refreshToken: String!
+}
+
 type Query {
+  refresh: TokenResponseDto!
   me: User!
   countries: [Country!]!
   country(code: String!): Country!
+}
+
+type Mutation {
+  signIn(dto: SignInRequestDto!): TokenResponseDto!
+}
+
+input SignInRequestDto {
+  email: String!
+  password: String!
 }

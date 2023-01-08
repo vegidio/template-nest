@@ -1,9 +1,16 @@
+import { ExecutionContext } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { UnauthorizedException } from '@src/exceptions';
+import { getRequest } from '@src/utils';
+import { Request } from 'express-serve-static-core';
 
 export class RefreshTokenGuard extends AuthGuard('refresh-token') {
     constructor() {
         super();
+    }
+
+    getRequest(context: ExecutionContext): Request {
+        return getRequest(context);
     }
 
     // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types

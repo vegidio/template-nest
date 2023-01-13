@@ -1,5 +1,6 @@
 import { Body, Controller, Get, HttpCode, Post, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { ApiResponse, Response } from '@src/model';
 import { AuthService } from './auth.service';
 import { RefreshTokenGuard } from './guard';
 import { SignInRequestDto, TokenResponseDto } from './dto';
@@ -12,14 +13,18 @@ export class AuthController {
 
     @Post('signin')
     @HttpCode(200)
-    signIn(@Body() dto: SignInRequestDto): Promise<TokenResponseDto> {
-        return this.authService.signIn(dto.email, dto.password);
+    @ApiResponse(TokenResponseDto)
+    async signIn(@Body() dto: SignInRequestDto): Promise<Response<TokenResponseDto>> {
+        const data = await this.authService.signIn(dto.email, dto.password);
+        return new Response({ data });
     }
 
-    @ApiBearerAuth()
-    @UseGuards(RefreshTokenGuard)
     @Get('refresh')
-    refresh(@Token('sub') userId: number): Promise<TokenResponseDto> {
-        return this.authService.refresh(userId);
+    @UseGuards(RefreshTokenGuard)
+    @ApiBearerAuth()
+    @ApiResponse(TokenResponseDto)
+    async refresh(@Token('sub') userId: number): Promise<Response<TokenResponseDto>> {
+        const data = await this.authService.refresh(userId);
+        return new Response({ data });
     }
 }

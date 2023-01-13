@@ -1,8 +1,8 @@
 import { HttpException, HttpStatus } from '@nestjs/common';
-import { ResponseBody } from './ResponseBody';
+import { Error } from '@src/model';
 
 export class NotFoundException extends HttpException {
-    constructor(body?: Partial<ResponseBody>) {
+    constructor(body?: Partial<Error>) {
         body = {
             ...{
                 status: HttpStatus.NOT_FOUND,
@@ -12,6 +12,6 @@ export class NotFoundException extends HttpException {
             ...body,
         };
 
-        super(body, body.status);
+        super({ error: body }, body.status);
     }
 }

@@ -2,6 +2,7 @@ import { ClassSerializerInterceptor, Controller, Get, UseGuards, UseInterceptors
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { AccessTokenGuard } from '@src/auth/guard';
 import { Token } from '@src/auth/decorator';
+import { ApiResponse, Response } from '@src/model';
 import { UserService } from './user.service';
 import { User } from './user.entity';
 
@@ -14,7 +15,9 @@ export class UserController {
     constructor(private readonly userService: UserService) {}
 
     @Get('me')
-    findMe(@Token('sub') userId: number): Promise<User> {
-        return this.userService.findOneById(userId);
+    @ApiResponse(User)
+    async findMe(@Token('sub') userId: number): Promise<Response<User>> {
+        const data = await this.userService.findOneById(userId);
+        return new Response({ data });
     }
 }

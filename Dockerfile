@@ -7,7 +7,7 @@ RUN yarn global add @nestjs/cli
 # Copy & build
 COPY . /var/build
 WORKDIR /var/build
-RUN yarn --prod
+RUN yarn
 RUN yarn build
 
 # Node Prune

@@ -3,11 +3,10 @@ name: build
 on:
   push:
     branches:
-      - master
+      - main
 
 env:
   GHCR_IMAGE: ghcr.io/vegidio/countries
-  ECR_IMAGE: 318715067340.dkr.ecr.eu-north-1.amazonaws.com/countries
 
 jobs:
   build:
@@ -41,20 +40,3 @@ jobs:
           docker tag $GHCR_IMAGE:latest $GHCR_IMAGE:${{ env.IMAGE_VERSION }}
           docker push $GHCR_IMAGE:latest
           docker push $GHCR_IMAGE:${{ env.IMAGE_VERSION }}
-
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_AC_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_AC_SECRET }}
-          aws-region: eu-north-1
-
-      - name: Login to AWS ECR
-        id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v1
-
-      - name: Push to AWS registry
-        run: |
-          docker tag $ECR_IMAGE:latest $ECR_IMAGE:${{ env.IMAGE_VERSION }}
-          docker push $ECR_IMAGE:latest
-          docker push $ECR_IMAGE:${{ env.IMAGE_VERSION }}

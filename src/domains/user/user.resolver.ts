@@ -1,9 +1,9 @@
 import { UseGuards } from '@nestjs/common';
 import { Query, Resolver } from '@nestjs/graphql';
-import { AccessTokenGuard } from '@src/auth/guard';
-import { Token } from '@src/auth/decorator';
 import { UserService } from './user.service';
 import { User } from './user.entity';
+import { AccessTokenGuard } from '@src/domains/auth/guard';
+import { Token } from '@src/domains/auth/decorator';
 
 @UseGuards(AccessTokenGuard)
 @Resolver(() => User)

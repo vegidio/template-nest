@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
-import { AccessTokenDto } from '@src/auth/dto';
 import { keys } from '@src/config';
+import { AccessTokenDto } from '@src/domains/auth/dto';
 
 /**
  * This class will be called every time a guard referencing this strategy is used, i.e. `@UseGuards(AccessTokenGuard)`.

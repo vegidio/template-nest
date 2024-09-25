@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as argon2 from 'argon2';
-import { User, UserService } from '@src/user';
 import { keys } from '@src/config';
 import { UnauthorizedException } from '@src/exceptions';
 import { AccessTokenDto, RefreshTokenDto, TokenResponseDto } from './dto';
+import { User, UserService } from '@src/domains/user';
 
 @Injectable()
 export class AuthService {

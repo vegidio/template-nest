@@ -1,10 +1,10 @@
 import { Controller, Get, Param, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
-import { AccessTokenGuard } from '@src/auth/guard';
 import { ApiResponse, Response } from '@src/model';
 import { Country } from './country.entity';
 import { CountryCodePipe } from './country.pipe';
 import { CountryService } from './country.service';
+import { AccessTokenGuard } from '@src/domains/auth/guard';
 
 @ApiTags('Countries')
 @ApiBearerAuth()

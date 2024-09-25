@@ -1,9 +1,9 @@
 import { UseGuards } from '@nestjs/common';
 import { Args, Query, Resolver } from '@nestjs/graphql';
-import { AccessTokenGuard } from '@src/auth/guard';
 import { CountryService } from './country.service';
 import { Country } from './country.entity';
 import { CountryCodePipe } from './country.pipe';
+import { AccessTokenGuard } from '@src/domains/auth/guard';
 
 @UseGuards(AccessTokenGuard)
 @Resolver(() => Country)

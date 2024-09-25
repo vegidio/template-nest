@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { GraphQLModule } from '@nestjs/graphql';
-import { AuthModule } from './auth';
-import { CountryModule } from './country';
+import { CountryModule } from '@src/domains/country';
+import { AuthModule } from '@src/domains/auth';
 import { databaseOptions, graphqlConfig } from './config';
 
 @Module({
